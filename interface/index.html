@@ -22,8 +22,7 @@
 <div id="game-screen" class="hidden">
   <div id="scene-bar">
     <div id="scene-desc"></div>
-    <button id="btn-item">⊞</button>
-    <button id="btn-stat">⚔</button>
+    <button id="btn-panel">◈</button>
   </div>
   <div id="dialogue-log"></div>
   <div id="choices" class="hidden"></div>
@@ -33,26 +32,37 @@
   </div>
 </div>
 <div id="aff-notif" class="hidden"></div>
-<!-- 아이템 패널 -->
-<div id="item-panel" class="hidden">
-  <div id="item-panel-header">
-    <span>아이템</span>
-    <button id="btn-item-close">✕</button>
+<!-- 통합 패널 -->
+<div id="side-panel" class="hidden">
+  <div id="side-panel-header">
+    <span>현황</span>
+    <button id="btn-panel-close">✕</button>
   </div>
-  <div id="item-list">
-    <div class="item-empty">아직 아이템이 없습니다.</div>
+  <div id="side-panel-body">
+    <!-- 코인 -->
+    <div id="panel-coin-row">
+      <span id="panel-coin-label">코인</span>
+      <span id="panel-coin-val">0 C</span>
+    </div>
+    <!-- 스탯 -->
+    <div id="stat-list"></div>
+    <!-- 구분선 -->
+    <div id="panel-divider"></div>
+    <!-- 아이템 -->
+    <div id="item-list">
+      <div class="item-empty">아직 아이템이 없습니다.</div>
+    </div>
   </div>
 </div>
-<div id="item-overlay" class="hidden"></div>
-<!-- 스탯 패널 -->
-<div id="stat-panel" class="hidden">
-  <div id="stat-panel-header">
-    <span>스탯</span>
-    <span id="stat-coin">0 C</span>
-    <button id="btn-stat-close">✕</button>
+<div id="panel-overlay" class="hidden"></div>
+<!-- 아이템 상세 팝업 -->
+<div id="item-popup" class="hidden">
+  <div id="item-popup-inner">
+    <div id="item-popup-name"></div>
+    <div id="item-popup-desc"></div>
   </div>
-  <div id="stat-list"></div>
 </div>
+<div id="item-popup-overlay" class="hidden"></div>
 <script src="../items/items_prologue.js"></script>
 <script src="data.js"></script>
 <script src="ui.js"></script>
