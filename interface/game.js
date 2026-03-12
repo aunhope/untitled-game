@@ -132,7 +132,7 @@ const Game = (() => {
     typing = true;
     UI.addLine('player', choice.text, () => { typing = false; });
   }
-
+document.getElementById('btn-stat-close').onclick = closeStat;
   function getStatCost(cur) {
     return cur >= STAT_COST_THRESHOLD ? STAT_BASE_COST * 10 : STAT_BASE_COST;
   }
