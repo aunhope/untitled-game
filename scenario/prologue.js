@@ -1,1 +1,76 @@
-//
+/* ================================================
+   prologue.js — 프롤로그 시나리오
+================================================ */
+
+const SCRIPT_PROLOGUE = [
+  { type: 'scene', text: '지구의 유료화 5일째' },
+
+  { type: 'line', speaker: 'narration', text: '망가진 수로에서 물이 새어나온다. 건물이 휘청이더니 그 잔해가 하늘에서 떨어졌다.' },
+  { type: 'line', speaker: 'narration', text: '그 평화로웠던 물웅덩이에 파동이 일렀다. 누군가 물웅덩이를 밟고 지나갔다.' },
+  { type: 'line', speaker: 'narration', text: '그 사람은 후드를 뒤집어쓰고 있었다. 품 안에는 커다란 무언가가 안겨 있었다. 복부에서 붉은 것이 점점 옷으로 퍼져나갔다.' },
+  { type: 'line', speaker: 'narration', text: '[성좌, 물병자리에 핀 백합이 당신을 안타깝게 바라보고 있습니다.]' },
+  { type: 'line', speaker: 'narration', text: '발이 돌에 걸렸다. 그녀는 앞으로 넘어졌다. 그 가운데에도 품의 그것을 지키기 위해 몸을 돌려 등부터 떨어졌다.' },
+  { type: 'line', speaker: 'narration', text: '숨이 줄어들어 갔다. 시야가 점점 흐려졌다. 몸에 힘이 점점 빠져나갔다.' },
+  { type: 'line', speaker: 'narration', text: '[성좌, 물병자리에 핀 백합이 당신에게 관심을 가집니다.]' },
+  { type: 'line', speaker: 'narration', text: '[성좌, 물병자리에 핀 백합이 당신을 안타깝게 바라보고 있습니다.]' },
+  { type: 'line', speaker: 'narration', text: '그녀의 몸은 점점 차가워져 갔다. 그럼에도 품에 든 것이 추워질세라 온몸으로 감싸 안았다. 마지막 숨이 끊기는 그 순간까지도, 그 손만큼은 놓지 않았다.' },
+  { type: 'line', speaker: 'narration', text: '그렇게 그들은 그곳에 버려졌다.' },
+  { type: 'line', speaker: 'narration', text: '...' },
+  { type: 'line', speaker: 'narration', text: '시나리오가 끝난 이후, 꽃 하나가 날아서 그 시체 위에 앉았다.' },
+  { type: 'line', speaker: 'narration', text: '츠츠츳' },
+  { type: 'line', speaker: 'narration', text: '그리고 신형이 그곳에서 나와 그 품에 안긴 것을 가져갔다. 죽은 시신은 마치 그걸 기다린 듯 그 순간 힘없이 팔이 떨어졌다.' },
+
+  { type: 'line', speaker: 'gabriel',  text: '작네...' },
+  { type: 'line', speaker: 'narration', text: '가브리엘은 품에 안긴 작은 생명을 바라보았다. 누군가 피와 오물을 뒤집어쓰면서까지 구하고 싶어했던 것이었다.' },
+  { type: 'line', speaker: 'gabriel',  text: '잘 버텨줬어.' },
+  { type: 'line', speaker: 'narration', text: '흰 꽃에 깃들어 있던 가브리엘은 아이와 함께 지구에서 멀어졌다.' },
+
+  { type: 'unlock', char: 'uriel' },
+
+  { type: 'line', speaker: 'narration', text: '가브리엘이 손을 뻗자 활자들로 이루어진 소용돌이가 그녀의 손에서 뻗어났다.' },
+  { type: 'line', speaker: 'narration', text: '그리고 그것은 타원형을 그리며 앞으로 밀려나더니 원기둥의 형태가 되었다.' },
+  { type: 'line', speaker: 'narration', text: '가브리엘이 그곳을 통과하자 세계가 바뀌었다.' },
+  { type: 'line', speaker: 'narration', text: '하늘은 어둡지 않았다. 건물은 부서지지 않았다. 먹을 것도 마실 것도 풍족한 곳이었다. 그들은 넓디넓은 정원 한가운데 도착해 있었다.' },
+  { type: 'line', speaker: 'narration', text: '아이는 그 가운데에서 한 번도 울지 않았다. 엄마가 죽는 그 과정 속에서도, 포털을 타고 장소가 바뀐 순간에도.' },
+  { type: 'line', speaker: 'narration', text: '그때 멀리서 천사 하나가 부리나케 뛰어오고 있었다. 금빛의 찰랑이는 머릿결에 에메랄드빛 눈을 가진 천사였다.' },
+
+  { type: 'line', speaker: 'uriel',    text: '야, 가브리엘. 어디 갔어! 서기관님이 부르신지가 언젠데...!' },
+  { type: 'line', speaker: 'narration', text: '멀리서 우리엘이 금발을 휘날리며 날아오고 있었다.' },
+  { type: 'line', speaker: 'narration', text: '아주 빠른 속도로. 거침 없이.' },
+  { type: 'line', speaker: 'narration', text: '가브리엘은 품에 들어 있던 아이를 무의식적으로 더 강하게 끌어안았다.' },
+  { type: 'line', speaker: 'uriel',    text: '음? 야, 너 품에 그거 뭐야?' },
+  { type: 'line', speaker: 'gabriel',  text: '왜, 뭐하러 궁금한데?' },
+  { type: 'line', speaker: 'narration', text: '가브리엘은 몸을 돌렸다. 그러자 우리엘은 더욱 더 집요하게 틈을 파고들었다.' },
+  { type: 'line', speaker: 'uriel',    text: '너 나한테 뭐 숨기냐? 너 또 어디 몰래 다녀왔지? 빨리 열기나 해!' },
+  { type: 'line', speaker: 'narration', text: '우리엘이 가브리엘의 손을 잡고 흔들자 가브리엘의 몸이 갸우뚱 휘청였다.' },
+  { type: 'line', speaker: 'gabriel',  text: '그만! 어린 아이야, 어린아이! 하아...' },
+  { type: 'line', speaker: 'uriel',    text: '어린아이...? 잠시만, 너 방금 뭐라고 했어?' },
+  { type: 'line', speaker: 'narration', text: '우리엘은 믿을 수 없다는 듯 가브리엘 품을 파고 들었다. 그리고 그 품에는 울지도 않는 어린 아이가 자고 있었다.' },
+  { type: 'line', speaker: 'gabriel',  text: '서기관에게는 비밀...로 할 수는 없겠구나.' },
+  { type: 'line', speaker: 'narration', text: '가브리엘은 우리엘을 한심하게 바라보고 있었다.' },
+  { type: 'line', speaker: 'uriel',    text: '너 설마, 미쳤구나!' },
+  { type: 'line', speaker: 'narration', text: '우리엘이 시선을 내리자 가브리엘 몸에 작고 작은 스파크들이 잔상처럼 터지고 있었다.' },
+  { type: 'line', speaker: 'gabriel',  text: '알아. 시나리오 개입은 안된다는 걸. 그냥, 갑자기 그러고 싶었을 뿐이야.' },
+  { type: 'line', speaker: 'uriel',    text: '흐음... 그래서, 키우겠다는거지?' },
+  { type: 'line', speaker: 'narration', text: '가브리엘이 나지막히 고개를 끄덕였다.' },
+  { type: 'line', speaker: 'uriel',    text: '뭐 서기관님이야 뭐, 그냥 대충 떼를 쓰면 알아서 해결 되겠지.' },
+  { type: 'line', speaker: 'uriel',    text: '그래서, 얘 이름은 뭔데?' },
+  { type: 'line', speaker: 'gabriel',  text: '딱히 정한 건 없어. 음 오늘의 운세 좀 뽑아봐.' },
+  { type: 'line', speaker: 'narration', text: '우리엘은 도깨비 보따리를 열어 아이템을 하나 샀다. \'미래의 별자리 카드 컬랙션\'란 아이템이었다.' },
+  { type: 'line', speaker: 'uriel',    text: '음... 이거 고장 났나? 작동을 안 하는데?' },
+  { type: 'line', speaker: 'narration', text: '우리엘은 그 아이템을 아이에게 사용했지만 반응하지 않았다.' },
+  { type: 'line', speaker: 'gabriel',  text: '멍청아 그거 성좌한테만 쓸 수 있는거잖아.' },
+  { type: 'line', speaker: 'narration', text: '가브리엘은 남는 한 손으로 우리엘의 머리를 콩 쳤다.' },
+  { type: 'line', speaker: 'narration', text: '품에는 아직 어린 아이가 새록 새록 잠이 들어 있었다.' },
+  { type: 'line', speaker: 'gabriel',  text: '이름이라...' },
+
+  { type: 'input' },
+
+  { type: 'line', speaker: 'gabriel',  text: '{{name}}' },
+  { type: 'line', speaker: 'uriel',    text: '센스가 좀 많이 구린 것 같은데?' },
+  { type: 'line', speaker: 'gabriel',  text: '닥쳐' },
+  { type: 'line', speaker: 'gabriel',  text: '아무튼 상관 없어.' },
+  { type: 'line', speaker: 'gabriel',  text: '이제부턴 내가 얘 엄마니까' },
+
+  { type: 'end' },
+];
