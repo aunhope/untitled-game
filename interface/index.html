@@ -11,8 +11,7 @@
 <div id="title-screen">
   <div class="title-sub">천상의 이야기</div>
   <div class="title-main">untitled</div>
-  <button class="title-btn" id="btn-start">처음부터</button>
-  <button class="title-btn hidden" id="btn-continue">계속하기</button>
+  <button class="title-btn" id="btn-start">시작하기</button>
 </div>
 
 <div id="gender-screen" class="hidden">
@@ -24,20 +23,24 @@
 </div>
 
 <div id="game-screen" class="hidden">
-  <div id="scene-bar">
-    <div id="scene-desc"></div>
-    <button id="btn-item">⊞</button>
-  </div>
-  <div id="dialogue-log"></div>
+<div id="scene-bar">
+  <div id="scene-desc"></div>
+  <button id="btn-item">⊞</button>
+</div>  <div id="dialogue-log"></div>
   <div id="choices" class="hidden"></div>
   <div id="bottom-bar">
     <div id="affinity-bar"></div>
-    <button id="btn-save">저장</button>
+    <button id="btn-next">›</button>
   </div>
 </div>
 
 <div id="aff-notif" class="hidden"></div>
 
+<script src="../items/items_prologue.js"></script>
+<script src="data.js"></script>
+<script src="ui.js"></script>
+<script src="../scenario/prologue.js"></script>
+<script src="game.js"></script>
 <!-- 아이템 패널 -->
 <div id="item-panel" class="hidden">
   <div id="item-panel-header">
@@ -49,16 +52,5 @@
   </div>
 </div>
 <div id="item-overlay" class="hidden"></div>
-
-<!-- 인터페이스 -->
-<script src="data.js"></script>
-<script src="ui.js"></script>
-
-<!-- 시나리오 -->
-<script src="../scenario/prologue.js"></script>
-
-<!-- 게임 로직 -->
-<script src="game.js"></script>
-
 </body>
 </html>
