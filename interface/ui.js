@@ -91,7 +91,7 @@ const UI = (() => {
       box.appendChild(btn);
     });
   }
-
+   //
   // 이름 입력 UI
   function showNameInput(onConfirm) {
     const log = document.getElementById('dialogue-log');
