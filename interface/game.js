@@ -18,6 +18,8 @@ const Game = (() => {
     flags: {},
     dead: [],
     items: [],
+    coin: 0,
+    stats: { ...STATS_INIT },
   };
 
   let currentScript = [];
@@ -87,6 +89,16 @@ const Game = (() => {
         giveItem(node.key);
         step();
         break;
+      case 'coin':
+        state.coin += node.amount;
+        StatUI.renderStatPanel();
+        step();
+        break;
+      case 'stat':
+        state.stats[node.key] = Math.min(STAT_MAX, (state.stats[node.key] ?? 0) + node.delta);
+        StatUI.renderStatPanel();
+        step();
+        break;
       case 'unlock':
         unlockAffinity(node.char);
         step();
@@ -119,6 +131,24 @@ const Game = (() => {
     if (choice.flag) state.flags[choice.flag] = true;
     typing = true;
     UI.addLine('player', choice.text, () => { typing = false; });
+  }
+
+  function getStatCost(cur) {
+    return cur >= STAT_COST_THRESHOLD ? STAT_BASE_COST * 10 : STAT_BASE_COST;
+  }
+
+  function upgradeStat(key) {
+    const cur  = state.stats[key] ?? 0;
+    const cost = getStatCost(cur);
+    if (cur >= STAT_MAX || state.coin < cost) return;
+    state.coin -= cost;
+    state.stats[key] = cur + 1;
+    StatUI.renderStatPanel();
+  }
+
+  function checkStatRequire(require) {
+    if (!require) return true;
+    return Object.entries(require).every(([k, v]) => (state.stats[k] ?? 0) >= v);
   }
 
   function init() {
@@ -160,9 +190,22 @@ const Game = (() => {
       if (e.target.closest('#choices') || e.target.closest('#bottom-bar') || e.target.closest('#scene-bar') || e.target.closest('#name-input-box')) return;
       step();
     });
+    // 스탯 패널
+    const statOverlay = document.getElementById('stat-overlay');
+    const closeStat = () => {
+      document.getElementById('stat-panel').classList.add('hidden');
+      statOverlay.classList.add('hidden');
+    };
+    document.getElementById('btn-stat').onclick = () => {
+      document.getElementById('stat-panel').classList.remove('hidden');
+      statOverlay.classList.remove('hidden');
+      StatUI.renderStatPanel();
+    };
+    document.getElementById('btn-stat-close').onclick = closeStat;
+    statOverlay.onclick = closeStat;
   }
 
-  return { init, state, onChoice, runScript, unlockAffinity };
+  return { init, state, onChoice, runScript, unlockAffinity, upgradeStat, checkStatRequire };
 })();
 
 window.addEventListener('DOMContentLoaded', () => Game.init());
