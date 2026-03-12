@@ -1,7 +1,7 @@
 /* ================================================
    data.js — 캐릭터 정보 & 호감도 설정
 ================================================ */
-
+/**/
 const CHARACTERS = {
   gabriel:  { nameKo: '가브리엘', cls: 'gabriel',   bracket: true  },
   uriel:    { nameKo: '우리엘',   cls: 'uriel',     bracket: true  },
