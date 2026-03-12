@@ -17,6 +17,9 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+* { -webkit-user-select: none; user-select: none; }
+input, textarea { -webkit-user-select: text; user-select: text; }
+
 html, body {
   width: 100%; height: 100%;
   background: var(--bg); color: var(--text);
@@ -68,9 +71,6 @@ html, body {
 .gender-btn:hover { border-color: rgba(255,255,255,0.25); }
 
 /* ─── 게임 화면 ─── */
-* { -webkit-user-select: none; user-select: none; }
-input, textarea { -webkit-user-select: text; user-select: text; } 
-
 #game-screen {
   position: fixed; inset: 0;
   display: flex; flex-direction: column; background: var(--bg);
