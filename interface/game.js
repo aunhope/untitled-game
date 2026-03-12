@@ -4,6 +4,11 @@
 
 const Game = (() => {
 
+  // 모든 챕터 아이템 통합 (챕터 추가 시 여기에 스프레드)
+  const ITEMS = {
+    ...ITEMS_PROLOGUE,
+  };
+
   const state = {
     playerName:   '',
     playerGender: '',
@@ -12,11 +17,20 @@ const Game = (() => {
     scriptIndex: 0,
     flags: {},
     dead: [],
+    items: [],
   };
 
   let currentScript = [];
   let waiting = false;
   let typing  = false;
+
+  function giveItem(key) {
+    if (!ITEMS[key]) return;
+    if (!state.items.includes(key)) {
+      state.items.push(key);
+      UI.renderItemPanel(state.items, ITEMS);
+    }
+  }
 
   function unlockAffinity(charKey) {
     if (!state.unlockedChars.includes(charKey)) {
@@ -59,6 +73,20 @@ const Game = (() => {
         waiting = true;
         UI.showChoices(node.choices);
         break;
+      case 'lore': {
+        const it = ITEMS[node.key];
+        if (it) {
+          typing = true;
+          UI.addItemLore(it.name, it.desc, () => { typing = false; });
+        } else {
+          step();
+        }
+        break;
+      }
+      case 'item':
+        giveItem(node.key);
+        step();
+        break;
       case 'unlock':
         unlockAffinity(node.char);
         step();
@@ -85,68 +113,18 @@ const Game = (() => {
     if (choice.affinity) {
       Object.entries(choice.affinity).forEach(([k, d]) => changeAffinity(k, d));
     }
+    if (choice.items) {
+      choice.items.forEach(k => giveItem(k));
+    }
     if (choice.flag) state.flags[choice.flag] = true;
     typing = true;
     UI.addLine('player', choice.text, () => { typing = false; });
   }
 
-  function saveGame() {
-    const save = {
-      playerName:    state.playerName,
-      playerGender:  state.playerGender,
-      affinity:      { ...state.affinity },
-      flags:         { ...state.flags },
-      unlockedChars: [...state.unlockedChars],
-      scriptIndex:   state.scriptIndex,
-    };
-    localStorage.setItem('save', JSON.stringify(save));
-    UI.showSaveNotif();
-  }
-
-  function loadGame() {
-    const raw = localStorage.getItem('save');
-    if (!raw) return;
-    const save = JSON.parse(raw);
-    state.playerName   = save.playerName;
-    state.playerGender = save.playerGender;
-    Object.assign(state.affinity, save.affinity);
-    Object.assign(state.flags, save.flags);
-    state.unlockedChars = save.unlockedChars;
-    currentScript = SCRIPT_PROLOGUE;
-    state.scriptIndex = save.scriptIndex;
-    waiting = false;
-    typing  = false;
-    UI.showScreen('game-screen');
-    UI.clearLog();
-    UI.renderAffinityBar(state.affinity, state.unlockedChars);
-    step();
-  }
-
-  function resetGame() {
-    localStorage.removeItem('save');
-    state.playerName    = '';
-    state.playerGender  = '';
-    state.affinity      = { ...AFFINITY_INIT };
-    state.unlockedChars = [...AFFINITY_UNLOCKED_INIT];
-    state.scriptIndex   = 0;
-    state.flags         = {};
-    state.dead          = [];
-    waiting = false;
-    typing  = false;
-    document.getElementById('btn-continue').classList.add('hidden');
-    UI.showScreen('gender-screen');
-  }
-
   function init() {
     UI.showScreen('title-screen');
 
-    // 저장 데이터 있으면 계속하기 버튼 표시
-    if (localStorage.getItem('save')) {
-      document.getElementById('btn-continue').classList.remove('hidden');
-    }
-
-    document.getElementById('btn-continue').onclick = () => loadGame();
-    document.getElementById('btn-start').onclick = () => resetGame();
+    document.getElementById('btn-start').onclick = () => UI.showScreen('gender-screen');
 
     document.querySelectorAll('.gender-btn').forEach(btn => {
       btn.onclick = () => {
@@ -158,8 +136,7 @@ const Game = (() => {
       };
     });
 
-    // 저장 버튼
-    document.getElementById('btn-save').onclick = () => saveGame();
+    document.getElementById('btn-next').onclick = () => step();
 
     // 아이템 패널
     const itemPanel   = document.getElementById('item-panel');
@@ -182,13 +159,6 @@ const Game = (() => {
     document.getElementById('game-screen').addEventListener('click', (e) => {
       if (e.target.closest('#choices') || e.target.closest('#bottom-bar') || e.target.closest('#scene-bar') || e.target.closest('#name-input-box')) return;
       step();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') {
-        e.preventDefault();
-        step();
-      }
     });
   }
 
