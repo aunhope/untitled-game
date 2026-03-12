@@ -24,6 +24,7 @@ const AFFINITY_MIN = 0;
 
 // 개인 시나리오 트리거 임계값
 const AFFINITY_TRIGGERS = [15, 30, 45];
+//
 
 // 처음부터 호감도 바에 보이는 캐릭터 (만나는 순서대로 추가)
 // game.js에서 unlockAffinity('키') 호출 시 추가됨
