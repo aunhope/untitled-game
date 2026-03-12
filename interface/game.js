@@ -132,7 +132,7 @@ const Game = (() => {
     typing = true;
     UI.addLine('player', choice.text, () => { typing = false; });
   }
-document.getElementById('btn-stat-close').onclick = closeStat;
+
   function getStatCost(cur) {
     return cur >= STAT_COST_THRESHOLD ? STAT_BASE_COST * 10 : STAT_BASE_COST;
   }
@@ -191,6 +191,7 @@ document.getElementById('btn-stat-close').onclick = closeStat;
       if (!document.getElementById('stat-overlay').classList.contains('hidden')) return;
       step();
     });
+
     // 스탯 패널
     const statOverlay = document.getElementById('stat-overlay');
     const closeStat = () => {
@@ -202,6 +203,7 @@ document.getElementById('btn-stat-close').onclick = closeStat;
       statOverlay.classList.remove('hidden');
       StatUI.renderStatPanel();
     };
+    document.getElementById('btn-stat-close').onclick = closeStat;
     statOverlay.onclick = closeStat;
   }
 
