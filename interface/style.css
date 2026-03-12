@@ -169,7 +169,7 @@ html, body {
 }
 #btn-next:hover { color: var(--text); }
 #btn-next.invisible { visibility: hidden; }
-
+/*
 /* ─── 호감도 알림 — 가운데 아래서 올라옴 ─── */
 #aff-notif {
   position: fixed;
