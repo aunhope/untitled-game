@@ -54,7 +54,7 @@ html, body {
   transition: border-color 0.2s, color 0.2s;
 }
 .title-btn:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
-
+/*---*/
 /* ─── 성별 선택 ─── */
 #gender-screen {
   position: fixed; inset: 0;
