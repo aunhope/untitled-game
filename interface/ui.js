@@ -1,7 +1,7 @@
 /* ================================================
    ui.js — 화면 렌더링
 ================================================ */
-//제발!!!
+
 // 글자 하나씩 타이핑 출력
 function typeText(el, text, onDone) {
   let i = 0;
@@ -26,7 +26,7 @@ const UI = (() => {
       document.getElementById(s).classList.toggle('hidden', s !== id)
     );
   }
-//
+
   function setScene(text) {
     document.getElementById('scene-desc').textContent = `— ${text} —`;
   }
@@ -81,17 +81,22 @@ const UI = (() => {
     document.getElementById('btn-next').classList.add('invisible');
     choices.forEach((c, i) => {
       const btn = document.createElement('button');
-      btn.className = 'choice-btn';
-      btn.textContent = c.text;
-      btn.onclick = () => {
-        box.classList.add('hidden');
-        document.getElementById('btn-next').classList.remove('invisible');
-        Game.onChoice(i, c);
-      };
+      const canSelect = Game.checkStatRequire(c.require);
+      btn.className = 'choice-btn' + (canSelect ? '' : ' disabled');
+      btn.textContent = c.require && !canSelect
+        ? `${c.text} [${Object.entries(c.require).map(([k,v]) => `${STAT_NAMES[k]} ${v} 이상`).join(', ')}]`
+        : c.text;
+      if (canSelect) {
+        btn.onclick = () => {
+          box.classList.add('hidden');
+          document.getElementById('btn-next').classList.remove('invisible');
+          Game.onChoice(i, c);
+        };
+      }
       box.appendChild(btn);
     });
   }
-   //
+
   // 이름 입력 UI
   function showNameInput(onConfirm) {
     const log = document.getElementById('dialogue-log');
@@ -196,4 +201,40 @@ const UI = (() => {
   }
 
   return { showScreen, setScene, addLine, addItemLore, renderItemPanel, clearLog, showChoices, showNameInput, showAffinityNotif, renderAffinityBar };
+})();
+
+const StatUI = (() => {
+  function renderStatPanel() {
+    const coinEl = document.getElementById('stat-coin');
+    if (coinEl) coinEl.textContent = `${Game.state.coin ?? 0} C`;
+
+    const list = document.getElementById('stat-list');
+    if (!list) return;
+    list.innerHTML = '';
+
+    Object.entries(STAT_NAMES).forEach(([key, name]) => {
+      const cur      = Game.state.stats?.[key] ?? 0;
+      const cost     = Game.state.stats[key] >= STAT_COST_THRESHOLD ? STAT_BASE_COST * 10 : STAT_BASE_COST;
+      const canAfford = (Game.state.coin ?? 0) >= cost;
+      const maxed    = cur >= STAT_MAX;
+
+      const row = document.createElement('div');
+      row.className = 'stat-row';
+      row.innerHTML = `
+        <span class="stat-name">${name}</span>
+        <span class="stat-val">${cur}</span>
+        <button class="stat-up-btn${!canAfford || maxed ? ' disabled' : ''}"
+          data-key="${key}"${maxed ? ' disabled' : ''}>
+          ${maxed ? 'MAX' : `+1 (${cost}C)`}
+        </button>
+      `;
+      list.appendChild(row);
+    });
+
+    list.querySelectorAll('.stat-up-btn:not([disabled])').forEach(btn => {
+      btn.onclick = () => Game.upgradeStat(btn.dataset.key);
+    });
+  }
+
+  return { renderStatPanel };
 })();
