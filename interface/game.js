@@ -188,7 +188,7 @@ const Game = (() => {
 
     document.getElementById('game-screen').addEventListener('click', (e) => {
       if (e.target.closest('#choices') || e.target.closest('#bottom-bar') || e.target.closest('#scene-bar') || e.target.closest('#name-input-box')) return;
-      if (!document.getElementById('stat-panel').classList.contains('hidden')) return;
+      if (!document.getElementById('stat-overlay').classList.contains('hidden')) return;
       step();
     });
     // 스탯 패널
