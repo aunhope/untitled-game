@@ -26,7 +26,7 @@ const UI = (() => {
       document.getElementById(s).classList.toggle('hidden', s !== id)
     );
   }
-
+//
   function setScene(text) {
     document.getElementById('scene-desc').textContent = `— ${text} —`;
   }
