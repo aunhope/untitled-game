@@ -2,7 +2,6 @@
    ui.js — 화면 렌더링
 ================================================ */
 
-// 글자 하나씩 타이핑 출력
 function typeText(el, text, onDone) {
   let i = 0;
   const cursor = document.createElement('span');
@@ -37,10 +36,8 @@ const UI = (() => {
     const wrap = document.createElement('div');
     wrap.className = 'dl' + (speakerKey === 'narration' ? ' narration' : '');
 
-    // {{name}} 플레이스홀더 치환
     text = text.replace('{{name}}', `그래, ${Game.state.playerName} 어때?`);
 
-    // 화자 레이블
     if (speakerKey !== 'narration') {
       const spEl = document.createElement('div');
       spEl.className = `spk ${char.cls}`;
@@ -52,7 +49,6 @@ const UI = (() => {
       wrap.appendChild(spEl);
     }
 
-    // 대사 본문 (괄호 포함)
     const txtEl = document.createElement('div');
     txtEl.className = 'txt';
     wrap.appendChild(txtEl);
@@ -76,30 +72,28 @@ const UI = (() => {
     const box = document.getElementById('choices');
     box.innerHTML = '';
     box.classList.remove('hidden');
-    document.getElementById('btn-next').classList.add('invisible');
+    document.getElementById('btn-save').classList.add('invisible');
     choices.forEach((c, i) => {
       const btn = document.createElement('button');
       btn.className = 'choice-btn';
       btn.textContent = c.text;
       btn.onclick = () => {
         box.classList.add('hidden');
-        document.getElementById('btn-next').classList.remove('invisible');
+        document.getElementById('btn-save').classList.remove('invisible');
         Game.onChoice(i, c);
       };
       box.appendChild(btn);
     });
   }
 
-  // 이름 입력 UI
   function showNameInput(onConfirm) {
     const log = document.getElementById('dialogue-log');
-
     const box = document.createElement('div');
     box.id = 'name-input-box';
     box.innerHTML = `
       <div class="name-input-label">이름을 지어주세요</div>
       <div class="name-input-row">
-        <input id="name-input-field" type="text" maxlength="10" placeholder="이름" autocomplete="off" spellcheck="false" />
+        <input id="name-input-field" type="text" maxlength="6" placeholder="이름" autocomplete="off" spellcheck="false" />
         <button id="name-input-confirm">확인</button>
       </div>
     `;
@@ -108,7 +102,6 @@ const UI = (() => {
 
     const field = box.querySelector('#name-input-field');
     const confirmBtn = box.querySelector('#name-input-confirm');
-
     field.focus();
 
     const confirm = () => {
@@ -117,11 +110,8 @@ const UI = (() => {
       box.remove();
       onConfirm(name);
     };
-
     confirmBtn.onclick = confirm;
-    field.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') confirm();
-    });
+    field.addEventListener('keydown', (e) => { if (e.key === 'Enter') confirm(); });
   }
 
   let notifTimer = null;
@@ -142,6 +132,19 @@ const UI = (() => {
     }, 2500);
   }
 
+  let saveNotifTimer = null;
+  function showSaveNotif() {
+    const notif = document.getElementById('aff-notif');
+    notif.innerHTML = '저장되었습니다';
+    notif.classList.remove('hidden');
+    requestAnimationFrame(() => notif.classList.add('show'));
+    if (saveNotifTimer) clearTimeout(saveNotifTimer);
+    saveNotifTimer = setTimeout(() => {
+      notif.classList.remove('show');
+      setTimeout(() => notif.classList.add('hidden'), 300);
+    }, 2000);
+  }
+
   function renderAffinityBar(affinity, unlocked) {
     const bar = document.getElementById('affinity-bar');
     bar.innerHTML = '';
@@ -156,5 +159,5 @@ const UI = (() => {
     });
   }
 
-  return { showScreen, setScene, addLine, clearLog, showChoices, showNameInput, showAffinityNotif, renderAffinityBar };
+  return { showScreen, setScene, addLine, clearLog, showChoices, showNameInput, showAffinityNotif, showSaveNotif, renderAffinityBar };
 })();
