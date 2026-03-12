@@ -26,6 +26,7 @@
 <div id="scene-bar">
   <div id="scene-desc"></div>
   <button id="btn-item">⊞</button>
+  <button id="btn-stat">⚔</button>
 </div>  <div id="dialogue-log"></div>
   <div id="choices" class="hidden"></div>
   <div id="bottom-bar">
@@ -42,7 +43,6 @@
 <script src="../scenario/prologue.js"></script>
 <script src="game.js"></script>
 <!-- 아이템 패널 -->
-<!---->
 <div id="item-panel" class="hidden">
   <div id="item-panel-header">
     <span>아이템</span>
@@ -53,5 +53,16 @@
   </div>
 </div>
 <div id="item-overlay" class="hidden"></div>
+
+<!-- 스탯 패널 -->
+<div id="stat-panel" class="hidden">
+  <div id="stat-panel-header">
+    <span>스탯</span>
+    <span id="stat-coin">0 C</span>
+    <button id="btn-stat-close">✕</button>
+  </div>
+  <div id="stat-list"></div>
+</div>
+<div id="stat-overlay" class="hidden"></div>
 </body>
 </html>
