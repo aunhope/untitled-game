@@ -1,8 +1,7 @@
 /* ================================================
    ui.js — 화면 렌더링
 ================================================ */
-//
-// 글자 하나씩 타이핑 출력
+
 function typeText(el, text, onDone) {
   let i = 0;
   const cursor = document.createElement('span');
@@ -37,24 +36,15 @@ const UI = (() => {
     const wrap = document.createElement('div');
     wrap.className = 'dl' + (speakerKey === 'narration' ? ' narration' : '');
 
-    // {{name}} 플레이스홀더 치환
     text = text.replace('{{name}}', `그래, ${Game.state.playerName} 어때?`);
 
-    // 화자 레이블
     if (speakerKey !== 'narration') {
       const spEl = document.createElement('div');
       spEl.className = `spk ${char.cls}`.trim();
-      if (char.bracket) {
-        spEl.textContent = char.nameKo;
-      } else if (speakerKey === 'player') {
-        spEl.textContent = Game.state.playerName;
-      } else {
-        spEl.textContent = char.nameKo;
-      }
+      spEl.textContent = speakerKey === 'player' ? Game.state.playerName : char.nameKo;
       wrap.appendChild(spEl);
     }
 
-    // 대사 본문 (괄호 포함)
     const txtEl = document.createElement('div');
     txtEl.className = 'txt';
     wrap.appendChild(txtEl);
@@ -62,11 +52,8 @@ const UI = (() => {
     log.scrollTop = 9999;
 
     let displayText = text;
-    if (char && char.bracket) {
-      displayText = `[${text}]`;
-    } else if (speakerKey === 'player') {
-      displayText = `"${text}"`;
-    }
+    if (char && char.bracket)      displayText = `[${text}]`;
+    else if (speakerKey === 'player') displayText = `"${text}"`;
     typeText(txtEl, displayText, onDone);
   }
 
@@ -97,10 +84,8 @@ const UI = (() => {
     });
   }
 
-  // 이름 입력 UI
   function showNameInput(onConfirm) {
     const log = document.getElementById('dialogue-log');
-
     const box = document.createElement('div');
     box.id = 'name-input-box';
     box.innerHTML = `
@@ -115,7 +100,6 @@ const UI = (() => {
 
     const field = box.querySelector('#name-input-field');
     const confirmBtn = box.querySelector('#name-input-confirm');
-
     field.focus();
 
     const confirm = () => {
@@ -124,16 +108,13 @@ const UI = (() => {
       box.remove();
       onConfirm(name);
     };
-
     confirmBtn.onclick = confirm;
-    field.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') confirm();
-    });
+    field.addEventListener('keydown', e => { if (e.key === 'Enter') confirm(); });
   }
 
   let notifTimer = null;
   function showAffinityNotif(charKey, delta) {
-    const char  = CHARACTERS[charKey];
+    const char = CHARACTERS[charKey];
     if (!char) return;
     const notif = document.getElementById('aff-notif');
     const isUp  = delta > 0;
@@ -168,21 +149,19 @@ const UI = (() => {
     const log  = document.getElementById('dialogue-log');
     const wrap = document.createElement('div');
     wrap.className = 'dl item-lore';
-
     const nameEl = document.createElement('div');
     nameEl.className = 'item-lore-name';
     nameEl.textContent = `[ ${name} ]`;
     wrap.appendChild(nameEl);
-
     const txtEl = document.createElement('div');
     txtEl.className = 'txt';
     wrap.appendChild(txtEl);
     log.appendChild(wrap);
     log.scrollTop = 9999;
-
     typeText(txtEl, desc, onDone);
   }
 
+  // 아이템 패널 렌더 (통합 패널 내부)
   function renderItemPanel(items, ITEMS) {
     const list = document.getElementById('item-list');
     list.innerHTML = '';
@@ -195,28 +174,48 @@ const UI = (() => {
       if (!it) return;
       const card = document.createElement('div');
       card.className = 'item-card';
-      card.innerHTML = `<div class="item-name">${it.name}</div><div>${it.desc}</div>`;
+      card.innerHTML = `<div class="item-name">${it.name}</div>`;
+      card.onclick = () => showItemPopup(it.name, it.desc);
       list.appendChild(card);
     });
   }
 
-  return { showScreen, setScene, addLine, addItemLore, renderItemPanel, clearLog, showChoices, showNameInput, showAffinityNotif, renderAffinityBar };
+  // 아이템 상세 팝업
+  function showItemPopup(name, desc) {
+    document.getElementById('item-popup-name').textContent = name;
+    document.getElementById('item-popup-desc').textContent = desc;
+    document.getElementById('item-popup').classList.remove('hidden');
+    document.getElementById('item-popup-overlay').classList.remove('hidden');
+  }
+
+  function hideItemPopup() {
+    document.getElementById('item-popup').classList.add('hidden');
+    document.getElementById('item-popup-overlay').classList.add('hidden');
+  }
+
+  return {
+    showScreen, setScene, addLine, addItemLore, renderItemPanel,
+    clearLog, showChoices, showNameInput, showAffinityNotif, renderAffinityBar,
+    hideItemPopup,
+  };
 })();
 
 const StatUI = (() => {
   function renderStatPanel() {
-    const coinEl = document.getElementById('stat-coin');
+    // 코인
+    const coinEl = document.getElementById('panel-coin-val');
     if (coinEl) coinEl.textContent = `${Game.state.coin ?? 0} C`;
 
+    // 스탯
     const list = document.getElementById('stat-list');
     if (!list) return;
     list.innerHTML = '';
 
     Object.entries(STAT_NAMES).forEach(([key, name]) => {
-      const cur      = Game.state.stats?.[key] ?? 0;
-      const cost     = Game.state.stats[key] >= STAT_COST_THRESHOLD ? STAT_BASE_COST * 10 : STAT_BASE_COST;
+      const cur       = Game.state.stats?.[key] ?? 0;
+      const cost      = cur >= STAT_COST_THRESHOLD ? STAT_BASE_COST * 10 : STAT_BASE_COST;
       const canAfford = (Game.state.coin ?? 0) >= cost;
-      const maxed    = cur >= STAT_MAX;
+      const maxed     = cur >= STAT_MAX;
 
       const row = document.createElement('div');
       row.className = 'stat-row';
