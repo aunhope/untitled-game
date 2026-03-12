@@ -7,13 +7,11 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
 <div id="title-screen">
   <div class="title-sub">천상의 이야기</div>
   <div class="title-main">untitled</div>
   <button class="title-btn" id="btn-start">시작하기</button>
 </div>
-
 <div id="gender-screen" class="hidden">
   <div class="gender-q">당신은 누구입니까?</div>
   <div class="gender-choices">
@@ -21,27 +19,20 @@
     <button class="gender-btn" data-gender="m">아들</button>
   </div>
 </div>
-
 <div id="game-screen" class="hidden">
-<div id="scene-bar">
-  <div id="scene-desc"></div>
-  <button id="btn-item">⊞</button>
-  <button id="btn-stat">⚔</button>
-</div>  <div id="dialogue-log"></div>
+  <div id="scene-bar">
+    <div id="scene-desc"></div>
+    <button id="btn-item">⊞</button>
+    <button id="btn-stat">⚔</button>
+  </div>
+  <div id="dialogue-log"></div>
   <div id="choices" class="hidden"></div>
   <div id="bottom-bar">
     <div id="affinity-bar"></div>
     <button id="btn-next">›</button>
   </div>
 </div>
-
 <div id="aff-notif" class="hidden"></div>
-
-<script src="../items/items_prologue.js"></script>
-<script src="data.js"></script>
-<script src="ui.js"></script>
-<script src="../scenario/prologue.js"></script>
-<script src="game.js"></script>
 <!-- 아이템 패널 -->
 <div id="item-panel" class="hidden">
   <div id="item-panel-header">
@@ -53,7 +44,6 @@
   </div>
 </div>
 <div id="item-overlay" class="hidden"></div>
-
 <!-- 스탯 패널 -->
 <div id="stat-panel" class="hidden">
   <div id="stat-panel-header">
@@ -63,5 +53,10 @@
   </div>
   <div id="stat-list"></div>
 </div>
+<script src="../items/items_prologue.js"></script>
+<script src="data.js"></script>
+<script src="ui.js"></script>
+<script src="../scenario/prologue.js"></script>
+<script src="game.js"></script>
 </body>
 </html>
