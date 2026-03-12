@@ -57,6 +57,7 @@ const SCRIPT_PROLOGUE = [
   { type: 'line', speaker: 'uriel',    text: '그래서, 얘 이름은 뭔데?' },
   { type: 'line', speaker: 'gabriel',  text: '딱히 정한 건 없어. 음 오늘의 운세 좀 뽑아봐.' },
   { type: 'line', speaker: 'narration', text: '우리엘은 도깨비 보따리를 열어 아이템을 하나 샀다. \'미래의 별자리 카드 컬랙션\'란 아이템이었다.' },
+  { type: 'lore', key: 'star_card' },
   { type: 'line', speaker: 'uriel',    text: '음... 이거 고장 났나? 작동을 안 하는데?' },
   { type: 'line', speaker: 'narration', text: '우리엘은 그 아이템을 아이에게 사용했지만 반응하지 않았다.' },
   { type: 'line', speaker: 'gabriel',  text: '멍청아 그거 성좌한테만 쓸 수 있는거잖아.' },
