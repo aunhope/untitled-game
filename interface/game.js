@@ -1,7 +1,7 @@
 /* ================================================
    game.js — 게임 로직 & 시나리오 진행
 ================================================ */
-//
+
 const Game = (() => {
 
   // 모든 챕터 아이템 통합 (챕터 추가 시 여기에 스프레드)
@@ -188,6 +188,7 @@ const Game = (() => {
 
     document.getElementById('game-screen').addEventListener('click', (e) => {
       if (e.target.closest('#choices') || e.target.closest('#bottom-bar') || e.target.closest('#scene-bar') || e.target.closest('#name-input-box')) return;
+      if (!document.getElementById('stat-panel').classList.contains('hidden')) return;
       step();
     });
     // 스탯 패널
@@ -201,7 +202,6 @@ const Game = (() => {
       statOverlay.classList.remove('hidden');
       StatUI.renderStatPanel();
     };
-    document.getElementById('btn-stat-close').onclick = closeStat;
     statOverlay.onclick = closeStat;
   }
 
