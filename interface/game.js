@@ -188,23 +188,18 @@ const Game = (() => {
 
     document.getElementById('game-screen').addEventListener('click', (e) => {
       if (e.target.closest('#choices') || e.target.closest('#bottom-bar') || e.target.closest('#scene-bar') || e.target.closest('#name-input-box')) return;
-      if (!document.getElementById('stat-overlay').classList.contains('hidden')) return;
       step();
     });
 
     // 스탯 패널
-    const statOverlay = document.getElementById('stat-overlay');
     const closeStat = () => {
       document.getElementById('stat-panel').classList.add('hidden');
-      statOverlay.classList.add('hidden');
     };
     document.getElementById('btn-stat').onclick = () => {
       document.getElementById('stat-panel').classList.remove('hidden');
-      statOverlay.classList.remove('hidden');
       StatUI.renderStatPanel();
     };
     document.getElementById('btn-stat-close').onclick = closeStat;
-    statOverlay.onclick = closeStat;
   }
 
   return { init, state, onChoice, runScript, unlockAffinity, upgradeStat, checkStatRequire };
