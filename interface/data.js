@@ -24,8 +24,25 @@ const AFFINITY_MIN = 0;
 
 // 개인 시나리오 트리거 임계값
 const AFFINITY_TRIGGERS = [15, 30, 45];
-//
 
 // 처음부터 호감도 바에 보이는 캐릭터 (만나는 순서대로 추가)
 // game.js에서 unlockAffinity('키') 호출 시 추가됨
 const AFFINITY_UNLOCKED_INIT = ['gabriel'];
+
+const STATS_INIT = {
+  str: 0,
+  agi: 0,
+  vit: 0,
+  mag: 0,
+};
+
+const STAT_NAMES = {
+  str: '근력',
+  agi: '민첩',
+  vit: '체력',
+  mag: '마력',
+};
+
+const STAT_MAX = 99;
+const STAT_BASE_COST = 10;
+const STAT_COST_THRESHOLD = 20;
