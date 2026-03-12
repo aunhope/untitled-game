@@ -4,10 +4,7 @@
 
 const Game = (() => {
 
-  // 모든 챕터 아이템 통합 (챕터 추가 시 여기에 스프레드)
-  const ITEMS = {
-    ...ITEMS_PROLOGUE,
-  };
+  const ITEMS = { ...ITEMS_PROLOGUE };
 
   const state = {
     playerName:   '',
@@ -168,38 +165,38 @@ const Game = (() => {
 
     document.getElementById('btn-next').onclick = () => step();
 
-    // 아이템 패널
-    const itemPanel   = document.getElementById('item-panel');
-    const itemOverlay = document.getElementById('item-overlay');
-    const closeItem = () => {
-      itemPanel.classList.remove('open');
+    // 통합 패널
+    const sidePanel   = document.getElementById('side-panel');
+    const panelOverlay = document.getElementById('panel-overlay');
+
+    const openPanel = () => {
+      sidePanel.classList.remove('hidden');
+      panelOverlay.classList.remove('hidden');
+      requestAnimationFrame(() => sidePanel.classList.add('open'));
+      StatUI.renderStatPanel();
+      UI.renderItemPanel(state.items, ITEMS);
+    };
+    const closePanel = () => {
+      sidePanel.classList.remove('open');
       setTimeout(() => {
-        itemPanel.classList.add('hidden');
-        itemOverlay.classList.add('hidden');
+        sidePanel.classList.add('hidden');
+        panelOverlay.classList.add('hidden');
       }, 300);
     };
-    document.getElementById('btn-item').onclick = () => {
-      itemPanel.classList.remove('hidden');
-      itemOverlay.classList.remove('hidden');
-      requestAnimationFrame(() => itemPanel.classList.add('open'));
-    };
-    document.getElementById('btn-item-close').onclick = closeItem;
-    itemOverlay.onclick = closeItem;
 
+    document.getElementById('btn-panel').onclick = openPanel;
+    document.getElementById('btn-panel-close').onclick = closePanel;
+    panelOverlay.onclick = closePanel;
+
+    // 아이템 팝업 닫기
+    document.getElementById('item-popup-overlay').onclick = UI.hideItemPopup;
+
+    // 게임 화면 클릭 → 다음 대사
     document.getElementById('game-screen').addEventListener('click', (e) => {
-      if (e.target.closest('#choices') || e.target.closest('#bottom-bar') || e.target.closest('#scene-bar') || e.target.closest('#name-input-box')) return;
+      if (e.target.closest('#choices') || e.target.closest('#bottom-bar') ||
+          e.target.closest('#scene-bar') || e.target.closest('#name-input-box')) return;
       step();
     });
-
-    // 스탯 패널
-    const closeStat = () => {
-      document.getElementById('stat-panel').classList.add('hidden');
-    };
-    document.getElementById('btn-stat').onclick = () => {
-      document.getElementById('stat-panel').classList.remove('hidden');
-      StatUI.renderStatPanel();
-    };
-    document.getElementById('btn-stat-close').onclick = closeStat;
   }
 
   return { init, state, onChoice, runScript, unlockAffinity, upgradeStat, checkStatRequire };
