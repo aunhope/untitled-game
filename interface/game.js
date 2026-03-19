@@ -9,7 +9,7 @@ const Game = (() => {
 
   const state = {
     playerName:   '',
-    playerGender: '',
+    playerGender: 'f',
     affinity: { ...AFFINITY_INIT },
     unlockedChars: [...AFFINITY_UNLOCKED_INIT],
     scriptIndex: 0,
@@ -125,6 +125,16 @@ const Game = (() => {
     }
   }
 
+  // 클릭/스페이스 공통 처리: 타이핑 중이면 스킵, 아니면 다음 대사
+  function advance() {
+    if (waiting) return;
+    if (typing) {
+      skipTyping = true;
+      return;
+    }
+    step();
+  }
+
   function onChoice(idx, choice) {
     waiting = false;
     if (choice.affinity) {
@@ -164,24 +174,18 @@ const Game = (() => {
   }
 
   function init() {
-    // 챕터 스크립트 등록
     registerScript('chapter1', SCRIPT_CHAPTER1);
 
     UI.showScreen('title-screen');
 
-    document.getElementById('btn-start').onclick = () => UI.showScreen('gender-screen');
+    document.getElementById('btn-start').onclick = () => {
+      state.playerName = '아이';
+      UI.showScreen('game-screen');
+      UI.renderAffinityBar(state.affinity, state.unlockedChars);
+      runScript(SCRIPT_PROLOGUE);
+    };
 
-    document.querySelectorAll('.gender-btn').forEach(btn => {
-      btn.onclick = () => {
-        state.playerGender = btn.dataset.gender;
-        state.playerName   = '아이';
-        UI.showScreen('game-screen');
-        UI.renderAffinityBar(state.affinity, state.unlockedChars);
-        runScript(SCRIPT_PROLOGUE);
-      };
-    });
-
-    document.getElementById('btn-next').onclick = () => step();
+    document.getElementById('btn-next').onclick = () => advance();
 
     const sidePanel    = document.getElementById('side-panel');
     const panelOverlay = document.getElementById('panel-overlay');
@@ -210,7 +214,15 @@ const Game = (() => {
     document.getElementById('game-screen').addEventListener('click', (e) => {
       if (e.target.closest('#choices') || e.target.closest('#bottom-bar') ||
           e.target.closest('#scene-bar') || e.target.closest('#name-input-box')) return;
-      step();
+      advance();
+    });
+
+    // 스페이스바로도 스킵/진행
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        advance();
+      }
     });
   }
 
