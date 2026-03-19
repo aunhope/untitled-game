@@ -5,6 +5,7 @@
 const Game = (() => {
 
   const ITEMS = { ...ITEMS_PROLOGUE };
+  const SCRIPTS = {};
 
   const state = {
     playerName:   '',
@@ -22,6 +23,10 @@ const Game = (() => {
   let currentScript = [];
   let waiting = false;
   let typing  = false;
+
+  function registerScript(key, script) {
+    SCRIPTS[key] = script;
+  }
 
   function giveItem(key) {
     if (!ITEMS[key]) return;
@@ -112,6 +117,9 @@ const Game = (() => {
         typing = true;
         UI.addLine('narration', '— 계속 —', () => { typing = false; });
         break;
+      case 'next_chapter':
+        if (SCRIPTS[node.key]) runScript(SCRIPTS[node.key]);
+        break;
       default:
         step();
     }
@@ -127,7 +135,14 @@ const Game = (() => {
     }
     if (choice.flag) state.flags[choice.flag] = true;
     typing = true;
-    UI.addLine('player', choice.text, () => { typing = false; });
+    UI.addLine('player', choice.text, () => {
+      typing = false;
+      if (choice.next && SCRIPTS[choice.next]) {
+        runScript(SCRIPTS[choice.next]);
+      } else {
+        step();
+      }
+    });
   }
 
   function getStatCost(cur) {
@@ -149,6 +164,9 @@ const Game = (() => {
   }
 
   function init() {
+    // 챕터 스크립트 등록
+    registerScript('chapter1', SCRIPT_CHAPTER1);
+
     UI.showScreen('title-screen');
 
     document.getElementById('btn-start').onclick = () => UI.showScreen('gender-screen');
@@ -165,8 +183,7 @@ const Game = (() => {
 
     document.getElementById('btn-next').onclick = () => step();
 
-    // 통합 패널
-    const sidePanel   = document.getElementById('side-panel');
+    const sidePanel    = document.getElementById('side-panel');
     const panelOverlay = document.getElementById('panel-overlay');
 
     const openPanel = () => {
@@ -188,10 +205,8 @@ const Game = (() => {
     document.getElementById('btn-panel-close').onclick = closePanel;
     panelOverlay.onclick = closePanel;
 
-    // 아이템 팝업 닫기
     document.getElementById('item-popup-overlay').onclick = UI.hideItemPopup;
 
-    // 게임 화면 클릭 → 다음 대사
     document.getElementById('game-screen').addEventListener('click', (e) => {
       if (e.target.closest('#choices') || e.target.closest('#bottom-bar') ||
           e.target.closest('#scene-bar') || e.target.closest('#name-input-box')) return;
@@ -199,7 +214,7 @@ const Game = (() => {
     });
   }
 
-  return { init, state, onChoice, runScript, unlockAffinity, upgradeStat, checkStatRequire };
+  return { init, state, onChoice, runScript, registerScript, unlockAffinity, upgradeStat, checkStatRequire };
 })();
 
 window.addEventListener('DOMContentLoaded', () => Game.init());
