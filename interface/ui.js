@@ -33,9 +33,10 @@ function typeText(el, text, onDone) {
 const UI = (() => {
 
   function showScreen(id) {
-    ['title-screen', 'game-screen'].forEach(s =>
-      document.getElementById(s).classList.toggle('hidden', s !== id)
-    );
+    ['title-screen', 'gender-screen', 'game-screen'].forEach(s => {
+      const el = document.getElementById(s);
+      if (el) el.classList.toggle('hidden', s !== id);
+    });
   }
 
   function setScene(text) {
