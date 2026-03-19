@@ -1,7 +1,7 @@
 /* ================================================
    prologue.js — 프롤로그 시나리오
 ================================================ */
-/*아따마 이게 배폭;ㅏ 잘 안되네*/
+
 const SCRIPT_PROLOGUE = [
   { type: 'scene', text: '지구의 유료화 5일째' },
 
@@ -74,4 +74,5 @@ const SCRIPT_PROLOGUE = [
   { type: 'line', speaker: 'gabriel',  text: '이제부턴 내가 얘 엄마니까' },
 
   { type: 'end' },
+  { type: 'next_chapter', key: 'chapter1' },
 ];
