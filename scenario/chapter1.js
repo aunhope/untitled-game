@@ -5,6 +5,7 @@
 const SCRIPT_CHAPTER1 = [
 
   { type: 'scene', text: '서기관실' },
+   { type: 'unlock', char: 'metatron' },
 
   { type: 'line', speaker: 'narration', text: '가브리엘이 문을 두드렸다. 익숙한 듯 대답을 기다리지도 않고 문을 열었다.' },
   { type: 'line', speaker: 'narration', text: '넓은 방이었다. 천장까지 닿는 서가, 빼곡한 문서들. 그 한가운데 무언가를 적고 있는 존재가 있었다.' },
