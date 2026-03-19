@@ -4,6 +4,20 @@
 
 let skipTyping = false;
 
+function getJosa(name, josa) {
+  const last = name[name.length - 1];
+  const code = last.charCodeAt(0);
+  const hasBatchim = (code - 0xAC00) % 28 !== 0;
+  const map = {
+    '이/가': hasBatchim ? '이' : '가',
+    '은/는': hasBatchim ? '은' : '는',
+    '을/를': hasBatchim ? '을' : '를',
+    '과/와': hasBatchim ? '과' : '와',
+    '아/야': hasBatchim ? '아' : '야',
+  };
+  return map[josa] || josa;
+}
+
 function typeText(el, text, onDone) {
   let i = 0;
   skipTyping = false;
@@ -43,13 +57,20 @@ const UI = (() => {
     document.getElementById('scene-desc').textContent = `— ${text} —`;
   }
 
+  function applyNameReplace(text) {
+    text = text.replace(/\{\{name\}\}(이\/가|은\/는|을\/를|과\/와|아\/야)/g,
+      (_, josa) => Game.state.playerName + getJosa(Game.state.playerName, josa));
+    text = text.replace('{{name}}', Game.state.playerName);
+    return text;
+  }
+
   function addLine(speakerKey, text, onDone) {
     const log  = document.getElementById('dialogue-log');
     const char = CHARACTERS[speakerKey] || { nameKo: speakerKey, cls: '', bracket: false };
     const wrap = document.createElement('div');
     wrap.className = 'dl' + (speakerKey === 'narration' ? ' narration' : '');
 
-    text = text.replace('{{name}}', Game.state.playerName);
+    text = applyNameReplace(text);
 
     if (speakerKey !== 'narration') {
       const spEl = document.createElement('div');
