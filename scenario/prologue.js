@@ -67,7 +67,7 @@ const SCRIPT_PROLOGUE = [
 
   { type: 'input' },
 
-  { type: 'line', speaker: 'gabriel',  text: '{{name}}' },
+  { type: 'line', speaker: 'gabriel',  text: '그래, {{name}} 어때?' },
   { type: 'line', speaker: 'uriel',    text: '센스가 좀 많이 구린 것 같은데?' },
   { type: 'line', speaker: 'gabriel',  text: '닥쳐' },
   { type: 'line', speaker: 'gabriel',  text: '아무튼 상관 없어.' },
@@ -76,3 +76,6 @@ const SCRIPT_PROLOGUE = [
   { type: 'end' },
   { type: 'next_chapter', key: 'chapter1' },
 ];
+
+
+
