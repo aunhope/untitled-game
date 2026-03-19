@@ -36,7 +36,7 @@ const UI = (() => {
     const wrap = document.createElement('div');
     wrap.className = 'dl' + (speakerKey === 'narration' ? ' narration' : '');
 
-    text = text.replace('{{name}}', `그래, ${Game.state.playerName} 어때?`);
+    text = text.replace('{{name}}', Game.state.playerName);
 
     if (speakerKey !== 'narration') {
       const spEl = document.createElement('div');
@@ -52,7 +52,7 @@ const UI = (() => {
     log.scrollTop = 9999;
 
     let displayText = text;
-    if (char && char.bracket)      displayText = `[${text}]`;
+    if (char && char.bracket)         displayText = `[${text}]`;
     else if (speakerKey === 'player') displayText = `"${text}"`;
     typeText(txtEl, displayText, onDone);
   }
@@ -161,7 +161,6 @@ const UI = (() => {
     typeText(txtEl, desc, onDone);
   }
 
-  // 아이템 패널 렌더 (통합 패널 내부)
   function renderItemPanel(items, ITEMS) {
     const list = document.getElementById('item-list');
     list.innerHTML = '';
@@ -180,7 +179,6 @@ const UI = (() => {
     });
   }
 
-  // 아이템 상세 팝업
   function showItemPopup(name, desc) {
     document.getElementById('item-popup-name').textContent = name;
     document.getElementById('item-popup-desc').textContent = desc;
@@ -202,11 +200,9 @@ const UI = (() => {
 
 const StatUI = (() => {
   function renderStatPanel() {
-    // 코인
     const coinEl = document.getElementById('panel-coin-val');
     if (coinEl) coinEl.textContent = `${Game.state.coin ?? 0} C`;
 
-    // 스탯
     const list = document.getElementById('stat-list');
     if (!list) return;
     list.innerHTML = '';
