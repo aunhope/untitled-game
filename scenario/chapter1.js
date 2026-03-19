@@ -40,7 +40,7 @@ const SCRIPT_CHAPTER1 = [
     type: 'choice',
     choices: [
       {
-        text: '가만히 기다린다.',
+        text: '(가만히 기다린다)',
         next: 'ch1_accept',
       },
       {
