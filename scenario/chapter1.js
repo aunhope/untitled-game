@@ -22,7 +22,7 @@ const SCRIPT_CHAPTER1 = [
   { type: 'line', speaker: 'narration', text: '그 한 마디로 충분했다. 가브리엘이 입을 다물었다.' },
   { type: 'line', speaker: 'metatron',  text: '가브리엘이 걱정하는 거 압니다. 그래서 우리엘을 붙인 것 아니겠습니까.' },
   { type: 'line', speaker: 'narration', text: '다시 시선이 나에게 돌아왔다.' },
-  { type: 'line', speaker: 'metatron',  text: '명령이 아니에요. 다만 {{name}}이 여기 있는 이상, 언젠간 해야 할 일입니다.' },
+  { type: 'line', speaker: 'metatron',  text: '명령이 아니에요. 다만 {{name}}이/가 여기 있는 이상, 언젠간 해야 할 일입니다.' },
   { type: 'line', speaker: 'narration', text: '서기관실에 잠시 침묵이 흘렀다.' },
 
   { type: 'scene', text: '서기관실 복도' },
