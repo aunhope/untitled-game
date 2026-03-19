@@ -47,8 +47,7 @@ const SCRIPT_CHAPTER1 = [
       {
         text: '(슬그머니 자리를 뜬다)',
         next: 'ch1_escape',
-        flag: 'ch1_escape_attempt',
-        affinity: { metatron: -2 },
+        flag: 'ch1_escape_attempt'
       },
     ],
   },
