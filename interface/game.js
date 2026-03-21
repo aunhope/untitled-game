@@ -52,10 +52,10 @@ const Game = (() => {
     UI.renderAffinityBar(state.affinity, state.unlockedChars);
   }
 
-  function runScript(script) {
+  function runScript(script, clearLog = true) {
     currentScript = script;
     state.scriptIndex = 0;
-    UI.clearLog();
+    if (clearLog) UI.clearLog();
     step();
   }
 
@@ -125,7 +125,6 @@ const Game = (() => {
     }
   }
 
-  // 클릭/스페이스 공통 처리: 타이핑 중이면 스킵, 아니면 다음 대사
   function advance() {
     if (waiting) return;
     if (typing) {
@@ -148,7 +147,7 @@ const Game = (() => {
     UI.addLine('player', choice.text, () => {
       typing = false;
       if (choice.next && SCRIPTS[choice.next]) {
-        runScript(SCRIPTS[choice.next]);
+        runScript(SCRIPTS[choice.next], choice.clearLog !== false);
       } else {
         step();
       }
@@ -174,7 +173,7 @@ const Game = (() => {
   }
 
   function init() {
-    registerScript('chapter1',    SCRIPT_CHAPTER1);
+    registerScript('chapter1',      SCRIPT_CHAPTER1);
     registerScript('ch1_gabriel_a', SCRIPT_CH1_GABRIEL_A);
     registerScript('ch1_gabriel_b', SCRIPT_CH1_GABRIEL_B);
     registerScript('ch1_gabriel_c', SCRIPT_CH1_GABRIEL_C);
@@ -221,7 +220,6 @@ const Game = (() => {
       advance();
     });
 
-    // 스페이스바로도 스킵/진행
     document.addEventListener('keydown', (e) => {
       if (e.code === 'Space') {
         e.preventDefault();
