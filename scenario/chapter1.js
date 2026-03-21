@@ -69,10 +69,10 @@ const SCRIPT_CHAPTER1 = [
  {
     type: 'choice',
     choices: [
-      { text: '괜찮아, 나 잘할 수 있어.',             next: 'ch1_gabriel_a', clearLog: false },
+      { text: '괜찮아, 나 잘할 수 있어.',             next: 'ch1_gabriel_a', clearLog: false, affinity: { gabriel: 1}},
       { text: '우리엘 언니가 독하게 굴 것 같아?',      next: 'ch1_gabriel_b', clearLog: false },
       { text: '…엄마는 같이 있어주면 안 돼?',          next: 'ch1_gabriel_c', clearLog: false },
-      { text: '(아무 말 없이 엄마 소매를 잡는다)',      next: 'ch1_gabriel_d', clearLog: false },
+      { text: '(아무 말 없이 엄마 소매를 잡는다)',      next: 'ch1_gabriel_d', clearLog: false, affinity: { gabriel: 1}},
     ],
   },
 ];
