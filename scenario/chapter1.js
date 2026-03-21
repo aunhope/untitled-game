@@ -156,7 +156,7 @@ const SCRIPT_CH1_GABRIEL_D = [
     type: 'choice',
     choices: [
       { text: '(가만히 기다린다)',      next: 'ch1_accept' },
-      { text: '(슬그머니 자리를 뜬다)', next: 'ch1_escape', flag: 'ch1_escape_attempt' },
+
     ],
   },
 ];
