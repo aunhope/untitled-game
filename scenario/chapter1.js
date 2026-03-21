@@ -66,13 +66,13 @@ const SCRIPT_CHAPTER1 = [
   { type: 'line', speaker: 'gabriel',   text: '밥은 먹었어? 빈속에 굴리면 나한테 와서 따지지 말고.' },
   { type: 'line', speaker: 'gabriel',   text: '아 참, 옷도 좀 챙겨 입어. 우리엘이 어디서 뛰게 할지 모르잖아.' },
   { type: 'line', speaker: 'narration', text: '불안을 숨길 수 없는가, 엄마는 좌우로 왔다갔다 하며 손톱을 깨물었다.' },
-  {
+ {
     type: 'choice',
     choices: [
-      { text: '괜찮아, 나 잘할 수 있어.',             next: 'ch1_gabriel_a' },
-      { text: '우리엘 언니가 독하게 굴 것 같아?',      next: 'ch1_gabriel_b' },
-      { text: '…엄마는 같이 있어주면 안 돼?',          next: 'ch1_gabriel_c' },
-      { text: '(아무 말 없이 엄마 소매를 잡는다)',      next: 'ch1_gabriel_d' },
+      { text: '괜찮아, 나 잘할 수 있어.',             next: 'ch1_gabriel_a', clearLog: false },
+      { text: '우리엘 언니가 독하게 굴 것 같아?',      next: 'ch1_gabriel_b', clearLog: false },
+      { text: '…엄마는 같이 있어주면 안 돼?',          next: 'ch1_gabriel_c', clearLog: false },
+      { text: '(아무 말 없이 엄마 소매를 잡는다)',      next: 'ch1_gabriel_d', clearLog: false },
     ],
   },
 ];
