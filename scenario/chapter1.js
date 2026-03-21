@@ -79,7 +79,7 @@ const SCRIPT_CHAPTER1 = [
 
 // ── A: 씩씩하게 받아치기 → 수락 루트만 ──
 const SCRIPT_CH1_GABRIEL_A = [
-  { type: 'line', speaker: 'player',    text: '괜찮아, 나 잘할 수 있어.' },
+
   { type: 'line', speaker: 'gabriel',   text: '…뭐, 그렇겠지.' },
   { type: 'line', speaker: 'gabriel',   text: '내가 키웠는데 못할 리가 없잖아.' },
   { type: 'line', speaker: 'narration', text: '엄마가 픽 웃었다. 시선은 여전히 딴 데였다.' },
@@ -99,7 +99,7 @@ const SCRIPT_CH1_GABRIEL_A = [
 
 // ── B: 우리엘 언니가 독하게 굴 것 같아? → 둘 다 가능 ──
 const SCRIPT_CH1_GABRIEL_B = [
-  { type: 'line', speaker: 'player',    text: '우리엘 언니가 독하게 굴 것 같아?' },
+
   { type: 'line', speaker: 'gabriel',   text: '독하긴. 그냥 기준이 좀 높은 거야.' },
   { type: 'line', speaker: 'gabriel',   text: '힘들면 힘들다고 해. 혼자 끙끙대지 말고.' },
   { type: 'line', speaker: 'gabriel',   text: '…뭐, 내가 미리 말은 해뒀어.' },
@@ -121,7 +121,7 @@ const SCRIPT_CH1_GABRIEL_B = [
 
 // ── C: 엄마는 같이 있어주면 안 돼? → 둘 다 가능 ──
 const SCRIPT_CH1_GABRIEL_C = [
-  { type: 'line', speaker: 'player',    text: '…엄마는 같이 있어주면 안 돼?' },
+
   { type: 'line', speaker: 'narration', text: '엄마가 잠깐 멈칫했다.' },
   { type: 'line', speaker: 'gabriel',   text: '그런 소리 하지 마, 서기관님 말씀이 맞으니까.' },
   { type: 'line', speaker: 'narration', text: '말은 그렇게 했는데 손이 내 머리 위로 올라왔다. 가볍게, 딱 한 번.' },
