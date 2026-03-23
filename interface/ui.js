@@ -125,20 +125,30 @@ const UI = (() => {
     box.innerHTML = `
       <div class="name-input-label">이름을 지어주세요</div>
       <div class="name-input-row">
-        <input id="name-input-field" type="text" maxlength="10" placeholder="이름" autocomplete="off" spellcheck="false" />
+        <input id="name-input-field" type="text" maxlength="6" placeholder="이름 (최대 6자)" autocomplete="off" spellcheck="false" />
         <button id="name-input-confirm">확인</button>
       </div>
+      <div id="name-input-error" style="color:#e07070;font-size:0.8em;margin-top:4px;min-height:1em;"></div>
     `;
     log.appendChild(box);
     log.scrollTop = 9999;
 
-    const field = box.querySelector('#name-input-field');
+    const BANNED = ['가브리엘', '우리엘', '라파엘', '라구엘', '요피엘', '미카엘', '메타트론'];
+
+    const field    = box.querySelector('#name-input-field');
     const confirmBtn = box.querySelector('#name-input-confirm');
+    const errorEl  = box.querySelector('#name-input-error');
     field.focus();
 
     const confirm = () => {
       const name = field.value.trim();
       if (!name) return;
+      if (BANNED.includes(name)) {
+        errorEl.textContent = '그 이름은 사용할 수 없습니다.';
+        field.value = '';
+        field.focus();
+        return;
+      }
       box.remove();
       onConfirm(name);
     };
