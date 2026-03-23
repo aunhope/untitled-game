@@ -22,7 +22,7 @@ const SCRIPT_CH1_ACCEPT = [
   { type: 'scene', text: '에덴 훈련 구역으로 향하는 길' },
   { type: 'unlock', char: 'uriel' },
   { type: 'line', speaker: 'narration', text: '손목을 놓아준 건 한참 뒤였다. 복도가 탁 트인 통로로 바뀌고, 발 아래 돌바닥이 흙으로 바뀔 즈음.' },
-  { type: 'line', speaker: 'uriel',     text: '메타트론이 뭐라디?' },
+  { type: 'line', speaker: 'uriel',     text: '서기관님이 뭐라고 했어?' },
   { type: 'line', speaker: 'narration', text: '걸으면서 묻는다. 시선은 앞을 향한 채로.' },
   { type: 'line', speaker: 'player',    text: '가벼운 훈련이라고 하셨어요.' },
   { type: 'line', speaker: 'narration', text: '언니가 고개를 한 번 끄덕인다. 잠깐 침묵이 흐른다 싶더니.' },
