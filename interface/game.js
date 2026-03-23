@@ -178,6 +178,7 @@ const Game = (() => {
     registerScript('ch1_gabriel_b', SCRIPT_CH1_GABRIEL_B);
     registerScript('ch1_gabriel_c', SCRIPT_CH1_GABRIEL_C);
     registerScript('ch1_gabriel_d', SCRIPT_CH1_GABRIEL_D);
+    registerScript('ch1_accept', SCRIPT_CH1_ACCEPT);
 
     UI.showScreen('title-screen');
 
