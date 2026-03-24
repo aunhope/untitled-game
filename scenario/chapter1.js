@@ -18,9 +18,9 @@ const SCRIPT_CHAPTER1 = [
   { type: 'line', speaker: 'narration', text: '테이블 한쪽에서 우리엘 언니와 미카엘님이 또 붙어 있다. 주제가 뭔지는 모르겠다. 알 필요도 없다. 어차피 결론 없이 끝날 테니까.' },
   { type: 'line', speaker: 'narration', text: '그 옆에서 라파엘님이 잔을 기울이며 둘을 번갈아 본다. 저분은 저게 목적이다.' },
 
-  { type: 'line', speaker: 'yophiel',  text: '우리엘. 테이블.' },
+  { type: 'line', speaker: 'jophiel',  text: '우리엘. 테이블.' },
   { type: 'line', speaker: 'uriel',    text: '안 쳤거든?!' },
-  { type: 'line', speaker: 'yophiel',  text: '시끄럽다.' },
+  { type: 'line', speaker: 'jophiel',  text: '시끄럽다.' },
   { type: 'line', speaker: 'narration', text: '요피엘님이 팔짱을 낀 채 한 마디 던지고 시선을 거둔다. 파티가 끝나는 순간 바로 일어설 것 같은 얼굴이다.' },
 
   { type: 'line', speaker: 'raguel',   text: '저, 저기… 음식 식기 전에 시작하는 게 좋을 것 같아요……' },
@@ -35,7 +35,7 @@ const SCRIPT_CHAPTER1 = [
   { type: 'line', speaker: 'narration', text: '언니가 팔을 번쩍 들고 소리친다. 미카엘님이 그 소리에 이쪽을 흘낏 본다. 그리고 바로 시선이 엄마한테로 넘어간다. 자연스럽게, 아무렇지도 않게.' },
   { type: 'line', speaker: 'narration', text: '라파엘님이 그 광경을 잔 너머로 바라본다. 말이 없다. 다 보고 있다는 느낌만 난다.' },
   { type: 'line', speaker: 'raphael',  text: '생일 축하함.' },
-  { type: 'line', speaker: 'yophiel',  text: '축하한다.' },
+  { type: 'line', speaker: 'jophiel',  text: '축하한다.' },
   { type: 'line', speaker: 'raguel',   text: '생일 축하해요!! 얼른 앉아요, 음식 식잖아요!!' },
   { type: 'line', speaker: 'narration', text: '라구엘님만 유일하게 진심이 느껴지는 얼굴이다.' },
 
@@ -47,7 +47,7 @@ const SCRIPT_CHAPTER1 = [
   { type: 'line', speaker: 'narration', text: '엄마가 초에 불을 붙인다.' },
   { type: 'line', speaker: 'gabriel',  text: '자, 불어봐.' },
   { type: 'line', speaker: 'uriel',    text: '소원 빌어!! 크게 빌어야 이루어져!!' },
-  { type: 'line', speaker: 'yophiel',  text: '소원이나 빌어라.' },
+  { type: 'line', speaker: 'jophiel',  text: '소원이나 빌어라.' },
   { type: 'line', speaker: 'uriel',    text: '그게 그 말이잖아?!' },
   { type: 'line', speaker: 'raguel',   text: '얼른요, 얼른!! 초 녹아요!!' },
   { type: 'line', speaker: 'narration', text: '또 시끄러워졌다. 나는 그 틈에 눈을 감는다.' },
